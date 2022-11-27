@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/splashScreen">
+
+    <fragment
+        android:id="@+id/sinUpfragment"
+        android:name="com.reemzet.chandan.fragment.SinUp"
+        android:label="fragment_sin_up"
+        tools:layout="@layout/fragment_sin_up" >
+        <action
+            android:id="@+id/action_sinUp_to_userRegisteration"
+            app:destination="@id/userRegisteration" />
+    </fragment>
+    <fragment
+        android:id="@+id/userRegisteration"
+        android:name="com.reemzet.chandan.fragment.UserRegisteration"
+        android:label="fragment_user_registeration"
+        tools:layout="@layout/fragment_user_registeration" >
+        <action
+            android:id="@+id/action_userRegisteration_to_menu"
+            app:destination="@id/menu" />
+        <action
+            android:id="@+id/action_userRegisteration_to_adminHome"
+            app:destination="@id/adminHome" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu"
+        android:name="com.reemzet.chandan.fragment.Menu"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menu_to_home2"
+            app:destination="@id/home2" />
+    </fragment>
+    <fragment
+        android:id="@+id/home2"
+        android:name="com.reemzet.chandan.fragment.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_categoryPage"
+            app:destination="@id/categoryPage" />
+        <action
+            android:id="@+id/action_home2_to_searchItem"
+            app:destination="@id/searchItem" />
+        <action
+            android:id="@+id/action_home2_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_home2_to_listofCategory"
+            app:destination="@id/listofCategory" />
+        <action
+            android:id="@+id/action_home2_to_bookDescPage"
+            app:destination="@id/bookDescPage" />
+        <action
+            android:id="@+id/action_home2_to_userProfile"
+            app:destination="@id/userProfile" />
+        <action
+            android:id="@+id/action_home2_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_home2_to_webViewPage"
+            app:destination="@id/webViewPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchItem"
+        android:name="com.reemzet.chandan.fragment.SearchItem"
+        android:label="fragment_search_item"
+        tools:layout="@layout/fragment_search_item" >
+        <action
+            android:id="@+id/action_searchItem_to_bookDescPage"
+            app:destination="@id/bookDescPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryPage"
+        android:name="com.reemzet.chandan.fragment.CategoryPage"
+        android:label="fragment_category_page"
+        tools:layout="@layout/fragment_category_page" >
+        <action
+            android:id="@+id/action_categoryPage_to_bookDescPage"
+            app:destination="@id/bookDescPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookDescPage"
+        android:name="com.reemzet.chandan.fragment.BookDescPage"
+        android:label="fragment_book_desc_page"
+        tools:layout="@layout/fragment_book_desc_page" />
+    <fragment
+        android:id="@+id/listofCategory"
+        android:name="com.reemzet.chandan.fragment.ListofCategory"
+        android:label="fragment_listof_category"
+        tools:layout="@layout/fragment_listof_category" >
+        <action
+            android:id="@+id/action_listofCategory_to_categoryPage"
+            app:destination="@id/categoryPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.reemzet.chandan.fragment.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_paymentPage"
+            app:destination="@id/paymentPage" />
+        <action
+            android:id="@+id/action_cartFragment_to_userProfile"
+            app:destination="@id/userProfile" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/paymentPage"
+        android:name="com.reemzet.chandan.fragment.PaymentPage"
+        android:label="fragment_payment_page"
+        tools:layout="@layout/fragment_payment_page" >
+        <action
+            android:id="@+id/action_paymentPage_to_orderConfirmPage"
+            app:destination="@id/orderConfirmPage" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/adminHome"
+        android:name="com.reemzet.chandan.adminfragment.AdminHome"
+        android:label="fragment_admin_home"
+        tools:layout="@layout/fragment_admin_home" >
+        <action
+            android:id="@+id/action_adminHome_to_addItems"
+            app:destination="@id/addItems" />
+        <action
+            android:id="@+id/action_adminHome_to_allOrderItemsAdmin"
+            app:destination="@id/allOrderItemsAdmin" />
+        <action
+            android:id="@+id/action_adminHome_to_allItemsAdmin"
+            app:destination="@id/allItemsAdmin" />
+        <action
+            android:id="@+id/action_adminHome_to_addItems2"
+            app:destination="@id/addItems" />
+        <action
+            android:id="@+id/action_adminHome_to_adminCatList"
+            app:destination="@id/adminCatList" />
+        <action
+            android:id="@+id/action_adminHome_to_manageOffer"
+            app:destination="@id/manageOffer" />
+        <action
+            android:id="@+id/action_adminHome_to_managePoster2"
+            app:destination="@id/managePoster2" />
+        <action
+            android:id="@+id/action_adminHome_to_storeDetails"
+            app:destination="@id/storeDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/myOrders"
+        android:name="com.reemzet.chandan.fragment.MyOrders"
+        android:label="fragment_my_orders"
+        tools:layout="@layout/fragment_my_orders" >
+        <action
+            android:id="@+id/action_myOrders_to_myOrderDetails"
+            app:destination="@id/myOrderDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfile"
+        android:name="com.reemzet.chandan.fragment.UserProfile"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/myOrderDetails"
+        android:name="com.reemzet.chandan.fragment.MyOrderDetails"
+        android:label="fragment_my_order_details"
+        tools:layout="@layout/fragment_my_order_details" />
+    <fragment
+        android:id="@+id/addItems"
+        android:name="com.reemzet.chandan.adminfragment.AddItems"
+        android:label="fragment_add_items"
+        tools:layout="@layout/fragment_add_items" />
+    <fragment
+        android:id="@+id/allOrderItemsAdmin"
+        android:name="com.reemzet.chandan.adminfragment.AllOrderItemsAdmin"
+        android:label="fragment_all_order_items_admin"
+        tools:layout="@layout/fragment_all_order_items_admin" >
+        <action
+            android:id="@+id/action_allOrderItemsAdmin_to_adminOrderDetails"
+            app:destination="@id/adminOrderDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.reemzet.chandan.fragment.SplashScreen"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreen_to_menu"
+            app:destination="@id/menu" />
+        <action
+            android:id="@+id/action_splashScreen_to_userRegisteration"
+            app:destination="@id/userRegisteration" />
+        <action
+            android:id="@+id/action_splashScreen_to_adminHome"
+            app:destination="@id/adminHome" />
+        <action
+            android:id="@+id/action_splashScreen_to_sinUp"
+            app:destination="@id/sinUpfragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allItemsAdmin"
+        android:name="com.reemzet.chandan.adminfragment.AllItemsAdmin"
+        android:label="fragment_all_items_admin"
+        tools:layout="@layout/fragment_all_items_admin" >
+        <action
+            android:id="@+id/action_allItemsAdmin_to_itemdescpage"
+            app:destination="@id/itemdescpage" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminOrderDetails"
+        android:name="com.reemzet.chandan.adminfragment.AdminOrderDetails"
+        android:label="fragment_admin_order_details"
+        tools:layout="@layout/fragment_admin_order_details" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.reemzet.chandan.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/itemdescpage"
+        android:name="com.reemzet.chandan.adminfragment.Itemdescpage"
+        android:label="fragment_itemdescpage"
+        tools:layout="@layout/fragment_itemdescpage" >
+        <action
+            android:id="@+id/action_itemdescpage_to_addItems"
+            app:destination="@id/addItems" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminCatList"
+        android:name="com.reemzet.chandan.adminfragment.AdminCatList"
+        android:label="fragment_admin_cat_list"
+        tools:layout="@layout/fragment_admin_cat_list" >
+        <action
+            android:id="@+id/action_adminCatList_to_adminCatPage"
+            app:destination="@id/adminCatPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminCatPage"
+        android:name="com.reemzet.chandan.adminfragment.AdminCatPage"
+        android:label="fragment_admin_cat_page"
+        tools:layout="@layout/fragment_admin_cat_page" />
+    <fragment
+        android:id="@+id/manageOffer"
+        android:name="com.reemzet.chandan.adminfragment.ManageOffer"
+        android:label="fragment_manage_offer"
+        tools:layout="@layout/fragment_manage_offer" />
+    <fragment
+        android:id="@+id/managePoster2"
+        android:name="com.reemzet.chandan.adminfragment.ManagePoster"
+        android:label="fragment_manage_poster2"
+        tools:layout="@layout/fragment_manage_poster2" />
+    <fragment
+        android:id="@+id/storeDetails"
+        android:name="com.reemzet.chandan.adminfragment.StoreDetails"
+        android:label="fragment_store_details"
+        tools:layout="@layout/fragment_store_details" />
+    <fragment
+        android:id="@+id/orderConfirmPage"
+        android:name="com.reemzet.chandan.fragment.OrderConfirmPage"
+        android:label="fragment_order_confirm_page"
+        tools:layout="@layout/fragment_order_confirm_page" >
+        <action
+            android:id="@+id/action_orderConfirmPage_to_myOrders"
+            app:destination="@id/myOrders" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewPage"
+        android:name="com.reemzet.chandan.fragment.WebViewPage"
+        android:label="fragment_webview_page"
+        tools:layout="@layout/fragment_webview_page" />
+</navigation>

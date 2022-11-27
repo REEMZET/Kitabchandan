@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "510460128697",
+    "firebase_url": "https://onlinemedis-f9e0a-default-rtdb.firebaseio.com",
+    "project_id": "onlinemedis-f9e0a",
+    "storage_bucket": "onlinemedis-f9e0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510460128697:android:07552fe39b8212dba79a68",
+        "android_client_info": {
+          "package_name": "com.reemzet.chandan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510460128697-8vobot79l1odflg8j85oqmeo3vuup05j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgBlZYsekEK_1vCkERSTz5AC8vYm_TDUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510460128697-8vobot79l1odflg8j85oqmeo3vuup05j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510460128697:android:e055e2f2e178d8d6a79a68",
+        "android_client_info": {
+          "package_name": "com.reemzet.onlinemedis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510460128697-8vobot79l1odflg8j85oqmeo3vuup05j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgBlZYsekEK_1vCkERSTz5AC8vYm_TDUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510460128697-8vobot79l1odflg8j85oqmeo3vuup05j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
