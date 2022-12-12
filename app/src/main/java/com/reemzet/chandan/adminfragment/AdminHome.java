@@ -186,7 +186,7 @@ public class AdminHome extends Fragment {
         constraintnotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogPlus dialogPlus = DialogPlus.newDialog(getActivity())
+                /*DialogPlus dialogPlus = DialogPlus.newDialog(getActivity())
                         .setContentHolder(new ViewHolder(R.layout.notificationview))
                         .setGravity(Gravity.CENTER)
                         .setCancelable(true)
@@ -221,7 +221,9 @@ public class AdminHome extends Fragment {
 
                         }
                     }
-                });
+                });*/
+                NavHostFragment.findNavController(AdminHome.this).navigate(R.id.action_adminHome_to_chatList);
+
             }
         });
 

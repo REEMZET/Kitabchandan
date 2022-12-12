@@ -52,7 +52,7 @@ public class SplashScreen extends Fragment {
                     NavHostFragment.findNavController(SplashScreen.this).navigate(R.id.sinUpfragment);
                 }
             }
-        }, 3000);
+        }, 3500);
 
 
    return view;
@@ -74,7 +74,7 @@ public class SplashScreen extends Fragment {
 
                 }
             }
-        }, 3000);
+        }, 3500);
     }
 
     private void checkexiting() {

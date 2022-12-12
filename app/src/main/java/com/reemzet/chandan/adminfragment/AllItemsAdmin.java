@@ -1,9 +1,11 @@
 package com.reemzet.chandan.adminfragment;
 
+import android.content.DialogInterface;
 import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -19,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -48,8 +51,9 @@ public class AllItemsAdmin extends Fragment {
     Toolbar toolbar;
     AutoCompleteTextView etsearchitem;
     ArrayList<String> itemlist;
-    ItemDetails allitemmodel;
-
+    FirebaseFirestore db;
+    TextView tvsort;
+    int itemcount=50;
 
 
     @Override
@@ -65,10 +69,12 @@ public class AllItemsAdmin extends Fragment {
         assert navHostFragment != null;
         navController = navHostFragment.getNavController();
         database=FirebaseDatabase.getInstance();
+        tvsort=view.findViewById(R.id.tvsort);
         allitemsref=database.getReference("App/Items/itemlist");
+        db = FirebaseFirestore.getInstance();
         query=allitemsref;
         itemlist=new ArrayList<>();
-        setAllItem();
+        setAllItem(50);
         toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("All items");
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
@@ -79,6 +85,16 @@ public class AllItemsAdmin extends Fragment {
                 NavHostFragment.findNavController(AllItemsAdmin.this).navigate(R.id.adminHome);
             }
         });
+        tvsort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemcount=itemcount+20;
+                tvsort.setText(String.valueOf(itemcount));
+                setAllItem(itemcount);
+
+            }
+        });
+
         etsearchitem.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -94,14 +110,11 @@ public class AllItemsAdmin extends Fragment {
             public void afterTextChanged(Editable editable) {
                     if (editable.length()==0){
                       query=  allitemsref=database.getReference("App/Items/itemlist");
-                      setAllItem();
+                      setAllItem(50);
                     }else {
                         query=allitemsref.orderByChild("itemtitle").startAt(editable.toString()).endAt(editable.toString()+ "\uf8ff");
-                        setAllItem();
+                        setAllItem(50);
                     }
-
-
-
             }
         });
 
@@ -112,10 +125,10 @@ public class AllItemsAdmin extends Fragment {
       return view;
     }
 
-    private void setAllItem() {
+    private void setAllItem(int count) {
         FirebaseRecyclerOptions<ItemDetails> options =
                 new FirebaseRecyclerOptions.Builder<ItemDetails>()
-                        .setQuery(query, ItemDetails.class)
+                        .setQuery(query.limitToFirst(count), ItemDetails.class)
                         .build();
 
         adapter=new FirebaseRecyclerAdapter<ItemDetails, BookViewHolder>(options) {
@@ -127,6 +140,24 @@ public class AllItemsAdmin extends Fragment {
                 holder.bookmrp.setPaintFlags(holder.bookmrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 holder.booktile.setText(model.getItemtitle());
                 holder.bookprice.setText("\u20B9"+model.getItemprice());
+
+                holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle("Are you sure?")
+                                .setMessage("Do you want to delete this item?")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        allitemsref.child(model.getItemid()).removeValue();
+                                        db.collection("Items").document(model.getItemid()).delete();
+                                    }
+                                }).setNegativeButton("No", null).show();
+
+                        return true;
+                    }
+                });
 
                 Glide.with(getActivity())
                         .load(model.getItemimg())

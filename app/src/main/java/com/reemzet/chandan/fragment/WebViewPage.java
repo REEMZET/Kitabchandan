@@ -53,25 +53,20 @@ public class WebViewPage extends Fragment {
     private void startWebView(String url) {
 
         WebSettings settings = webView.getSettings();
-
         settings.setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
-
-        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setBuiltInZoomControls(false);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
-
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
         progressDialog.show();
-
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return true;
             }
-
             @Override
             public void onPageFinished(WebView view, String url) {
                 if (progressDialog.isShowing()) {

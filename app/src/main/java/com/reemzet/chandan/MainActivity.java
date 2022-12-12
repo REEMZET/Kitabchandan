@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     int mCartItemCount = 0;
 
     TextView loginusername, loginuserphonno;
-    LinearLayout myorder,profile,share,logout,checkupdate,aboutdev,aboutorg;
+    LinearLayout myorder,profile,share,logout,checkupdate,aboutdev,aboutorg,chat;
     ImageView loginuserpic;
 
     ProgressDialog progressDialog;
@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         checkupdate=headerView.findViewById(R.id.ll_update);
         aboutdev=headerView.findViewById(R.id.ll_developer);
         aboutorg=headerView.findViewById(R.id.ll_organisation);
+        chat=headerView.findViewById(R.id.ll_chat);
         textCartItemCount=findViewById(R.id.tvcartcount);
         NavigationUI.setupWithNavController(navigationView, navController);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
@@ -154,6 +155,17 @@ public class MainActivity extends AppCompatActivity {
                     navController.navigate(R.id.allOrderItemsAdmin);
                 }else {
                     navController.navigate(R.id.myOrders);
+                }
+
+            }
+        });
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (userModel.getAccounttype().equals("Admin")){
+                    navController.navigate(R.id.chatList);
+                }else {
+                    navController.navigate(R.id.chatFragment);
                 }
 
             }
@@ -205,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundle=new Bundle();
-                bundle.putString("url","https://sites.google.com/view/reemzetdeveloper/home");
+                bundle.putString("url","https://sites.google.com/view/reemzet-developer/home");
                 navController.navigate(R.id.webViewPage,bundle);
             }
         });

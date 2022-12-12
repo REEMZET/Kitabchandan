@@ -27,7 +27,7 @@ import com.reemzet.chandan.R;
 import java.util.ArrayList;
 
 
-public class ListofCategory extends Fragment {
+public class  ListofCategory extends Fragment {
 
     RecyclerView  categorylistrecycler;
     FirebaseDatabase database;
@@ -55,7 +55,7 @@ public class ListofCategory extends Fragment {
 
 
         catlist=new ArrayList<>();
-        listofcatref.orderByChild("itemcat").addValueEventListener(new ValueEventListener() {
+        listofcatref.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds: snapshot.getChildren()){

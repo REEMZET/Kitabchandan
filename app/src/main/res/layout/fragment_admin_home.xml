@@ -463,7 +463,7 @@
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Create Notification"
+                            android:text="Chat"
                             android:textColor="#FDFCFC"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -476,7 +476,7 @@
 
                             android:layout_width="60dp"
                             android:layout_height="70dp"
-                            android:src="@drawable/notification"
+                            android:src="@drawable/contactus"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
 

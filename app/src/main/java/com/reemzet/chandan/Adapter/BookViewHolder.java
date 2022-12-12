@@ -12,7 +12,7 @@ import com.reemzet.chandan.R;
 
 public class BookViewHolder extends RecyclerView.ViewHolder {
         public TextView booktile,bookmrp,bookprice,bookstatus;
-        public ImageView bookimg,removeitem;
+        public ImageView bookimg;
         public ConstraintLayout itemconstraint;
     public BookViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -22,5 +22,6 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
             bookstatus=itemView.findViewById(R.id.bookstatus);
             bookmrp=itemView.findViewById(R.id.bookmrp);
             itemconstraint=itemView.findViewById(R.id.itemconstraint);
+
                 }
 }

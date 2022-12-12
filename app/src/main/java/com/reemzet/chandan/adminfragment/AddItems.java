@@ -57,7 +57,7 @@ public class AddItems extends Fragment {
     ItemDetails itemDetailswithtag;
     ItemDetails itemDetails;
     String itemname,itemcat,itemexam,itemdesc,itemimg,itemmrp,itemprice,itemtype,itemid;
-    DatabaseReference itemref,itemcatref;
+    DatabaseReference itemref;
     FirebaseDatabase database;
     Button submitbtn;
     EditText etitemname,etitemdesc,etitemprice,etitemmrp,etitemimgurl;
@@ -189,7 +189,7 @@ public class AddItems extends Fragment {
 
             }
         });
-        itemref.addListenerForSingleValueEvent(new ValueEventListener() {
+        itemref.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds: snapshot.getChildren()){

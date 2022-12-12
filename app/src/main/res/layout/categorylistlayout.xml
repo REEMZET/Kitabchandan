@@ -33,9 +33,10 @@
             android:layout_margin="2dp"
             android:fontFamily="@font/adamina"
             android:gravity="center"
+            android:maxLength="15"
             android:text="List of Items"
             android:textColor="#555555"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

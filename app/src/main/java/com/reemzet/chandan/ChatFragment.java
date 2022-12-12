@@ -46,7 +46,7 @@ public class ChatFragment extends Fragment {
 
     FirebaseDatabase database;
     MessageAdapter messageAdapter;
-    FirebaseAuth firebaseAuth;
+
     ArrayList<MessageModel> messageModelArrayList;
     EditText etmsg;
     ImageView msgsend;
@@ -57,7 +57,9 @@ public class ChatFragment extends Fragment {
     NavController navController;
     String date;
     Toolbar toolbar;
-
+    FirebaseAuth mAuth;
+    UserModel model;
+    String uid;
 
 
 
@@ -71,7 +73,7 @@ public class ChatFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         msgsend = view.findViewById(R.id.msgsend);
         etmsg = view.findViewById(R.id.etmsg);
-
+        mAuth= FirebaseAuth.getInstance();
         chatrecyclerview = view.findViewById(R.id.chatrecyclerView);
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         offensiveword = Arrays.asList("madharchod", "behanchod", "randi", "randiwala", "boorkebaal", "bosri", "muth", "juji", "laudalasun", "laudalasan", "lauda lasoon", "lauda lasan", "chod", "Gay,", "Transsexual", "Kuttiya", "Bitch", "sex", "Paad", "FART", "HOOKER", "Saala kutta", "Bloody dog", "Saali kutti", "Bloody bitch",
@@ -108,32 +110,22 @@ public class ChatFragment extends Fragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.popBackStack(R.id.home2, true);
-                NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.home2);
+                if (model.getAccounttype().equals("Admin")){
+                    navController.popBackStack(R.id.adminHome, true);
+                    NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.adminHome);
+                }else {
+                    navController.popBackStack(R.id.home2, true);
+                    NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.home2);
+                }
+
             }
         });
 
         messageModelArrayList = new ArrayList<>();
 
 //chat fetch
-        database.getReference().child("App").child("chat").child("public").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                messageModelArrayList.clear();
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    MessageModel messageModel = snapshot1.getValue(MessageModel.class);
-                    messageModelArrayList.add(messageModel);
-                }
-                messageAdapter.notifyDataSetChanged();
-                chatrecyclerview.smoothScrollToPosition(messageAdapter.getItemCount());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+checkaccounttype();
 
 //sendbtnonclick
         msgsend.setOnClickListener(v -> {
@@ -141,45 +133,18 @@ public class ChatFragment extends Fragment {
 
             } else {
                 checkoffensive();
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                FirebaseMessaging.getInstance().subscribeToTopic("all");
+                Calendar calander = Calendar.getInstance();
+                simpleDateFormat = new SimpleDateFormat("hh:mm a");
+                date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                timestamp = simpleDateFormat.format(calander.getTime());
+                String msgId = database.getReference().push().getKey();
+                MessageModel messageModel = new MessageModel(msg, model.getUsername(), msgId, model.getAccounttype(), model.getUseruid() ,timestamp, date);
 
-                if (mAuth.getCurrentUser() != null) {
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference Userref = database.getReference("App/user");
-                    Userref.keepSynced(true);
-                    if (mAuth.getUid() != null) {
-                        Userref.child(mAuth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                UserModel user = snapshot.getValue(UserModel.class);
-
-                                Calendar calander = Calendar.getInstance();
-                                simpleDateFormat = new SimpleDateFormat("hh:mm a");
-                                date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                                timestamp = simpleDateFormat.format(calander.getTime());
-                                String msgId = database.getReference().push().getKey();
-                                MessageModel messageModel = new MessageModel(msg, user.getUsername(), msgId, user.getAccounttype(), user.getUseruid() ,timestamp, date);
-                                database.getReference().child("App").child("chat").child("public").child(msgId).setValue(messageModel).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-
-                                    }
-                                });
-
-                                etmsg.setText("");
-
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                    }
-
-                }
-
+                    database.getReference().child("App").child("chat").child(uid).child(msgId).setValue(messageModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                        }});
+                etmsg.setText("");
 
             }
         });
@@ -204,6 +169,60 @@ public class ChatFragment extends Fragment {
             Pattern rx = Pattern.compile("\\b" + offensive + "\\b", Pattern.CASE_INSENSITIVE);
             msg = rx.matcher(msg).replaceAll(new String(new char[offensive.length()]).replace('\0', '*'));
         }
+    }
+    public void checkaccounttype(){
+
+       database.getReference("App/user").child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+             model =snapshot.getValue(UserModel.class);
+               if (model.getAccounttype().equals("Admin")){
+                   uid=getArguments().getString("uid");
+
+
+               }else {
+                   uid=mAuth.getUid();
+
+               }
+               loadchat();
+
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+
+           }
+       });
+    }
+    public void loadchat(){
+        database.getReference().child("App").child("chat").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()){
+                    Calendar calander = Calendar.getInstance();
+                    simpleDateFormat = new SimpleDateFormat("hh:mm a");
+                    date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                    timestamp = simpleDateFormat.format(calander.getTime());
+                    String msgId = database.getReference().push().getKey();
+                    MessageModel messageModel = new MessageModel("welcome to chandan pustak bhandar please leave your message we will contact you soon.","Chandan" , msgId, "default", "Defaultmsg" ,timestamp, date);
+                    database.getReference().child("App").child("chat").child(mAuth.getUid()).child(msgId).setValue(messageModel);
+                }else {
+                    messageModelArrayList.clear();
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        MessageModel messageModel = snapshot1.getValue(MessageModel.class);
+                        messageModelArrayList.add(messageModel);
+                    }
+                    messageAdapter.notifyDataSetChanged();
+                    chatrecyclerview.smoothScrollToPosition(messageAdapter.getItemCount());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

@@ -34,6 +34,12 @@
         <action
             android:id="@+id/action_menu_to_home2"
             app:destination="@id/home2" />
+        <action
+            android:id="@+id/action_menu_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_menu_to_cominSoonPage"
+            app:destination="@id/cominSoonPage" />
     </fragment>
     <fragment
         android:id="@+id/home2"
@@ -149,6 +155,9 @@
         <action
             android:id="@+id/action_adminHome_to_storeDetails"
             app:destination="@id/storeDetails" />
+        <action
+            android:id="@+id/action_adminHome_to_chatList"
+            app:destination="@id/chatList" />
     </fragment>
     <fragment
         android:id="@+id/myOrders"
@@ -272,4 +281,18 @@
         android:name="com.reemzet.chandan.fragment.WebViewPage"
         android:label="fragment_webview_page"
         tools:layout="@layout/fragment_webview_page" />
+    <fragment
+        android:id="@+id/cominSoonPage"
+        android:name="com.reemzet.chandan.fragment.CominSoonPage"
+        android:label="fragment_comin_soon_page"
+        tools:layout="@layout/fragment_comin_soon_page" />
+    <fragment
+        android:id="@+id/chatList"
+        android:name="com.reemzet.chandan.adminfragment.ChatList"
+        android:label="fragment_chat_list"
+        tools:layout="@layout/fragment_chat_list" >
+        <action
+            android:id="@+id/action_chatList_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
 </navigation>

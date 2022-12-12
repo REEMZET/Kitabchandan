@@ -53,7 +53,7 @@ public class AdminCatList extends Fragment {
 
 
         catlist=new ArrayList<>();
-        listofcatref.addValueEventListener(new ValueEventListener() {
+        listofcatref.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds: snapshot.getChildren()){

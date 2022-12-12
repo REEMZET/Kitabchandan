@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.reemzet.chandan.R;
 import com.reemzet.chandan.fragment.ListofCategory;
 
@@ -28,6 +30,7 @@ public class CategorylistAdapter extends RecyclerView.Adapter<CategorylistAdapte
     Context context;
     ArrayList<String> arrayList;
     NavController navController;
+    FirebaseDatabase database;
 
     public CategorylistAdapter(Context context, ArrayList<String> arrayList, NavController navController) {
         this.context = context;
@@ -52,8 +55,10 @@ public class CategorylistAdapter extends RecyclerView.Adapter<CategorylistAdapte
                 Bundle bundle=new Bundle();
                 bundle.putString("category",holder.tvcatname.getText().toString());
                 navController.navigate(R.id.action_listofCategory_to_categoryPage,bundle);
+
             }
         });
+
 
     }
 

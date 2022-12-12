@@ -16,7 +16,7 @@ import com.reemzet.chandan.R;
 
 
 public class Menu extends Fragment {
-    CardView bookstorecard,rubiks;
+    CardView bookstorecard,rubiks,stationary,puzzle;
     NavController navController;
     ProgressDialog progressDialog;
 
@@ -27,6 +27,9 @@ public class Menu extends Fragment {
         View view=inflater.inflate(R.layout.fragment_menu, container, false);
         rubiks=view.findViewById(R.id.rubiks);
         bookstorecard=view.findViewById(R.id.bookstorecard);
+        stationary=view.findViewById(R.id.stationary);
+        puzzle=view.findViewById(R.id.puzzle);
+
         progressDialog = new ProgressDialog(getActivity());
 
         NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
@@ -41,7 +44,19 @@ public class Menu extends Fragment {
         rubiks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                NavHostFragment.findNavController(Menu.this).navigate(R.id.cominSoonPage);
+            }
+        });
+        stationary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(Menu.this).navigate(R.id.cominSoonPage);
+            }
+        });
+        puzzle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(Menu.this).navigate(R.id.cominSoonPage);
             }
         });
 

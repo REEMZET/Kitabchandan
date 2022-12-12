@@ -486,14 +486,14 @@ public class CartFragment extends Fragment {
                                         Location storelocation=new Location("location2");
                                         storelocation.setLatitude(latitudeloc);
                                         storelocation.setLongitude(longitudeloc);
-                                        float fixeddistance=6f;
+                                        float fixeddistance=8f;
                                         float userlocationfromstore=userlocation.distanceTo(storelocation)/1000;
 
                                         tvdistance.setText("="+String.valueOf(userlocation.distanceTo(storelocation)/1000)+"KM");
                                         if (userlocationfromstore>fixeddistance){
                                             rangeavail=false;
                                             tvdistanceexceed.setVisibility(View.VISIBLE);
-                                            tvdistanceexceed.setText("sorry we can not reach at you because our facility only available  in 6km");
+                                            tvdistanceexceed.setText("sorry we can not reach at you because our facility only available  in 8km");
                                             tvdistance.setText("="+String.valueOf(userlocation.distanceTo(storelocation)/1000)+"Km");
                                         }else {
                                             rangeavail=true;

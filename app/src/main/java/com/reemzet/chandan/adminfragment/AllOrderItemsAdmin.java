@@ -11,11 +11,14 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -42,9 +45,10 @@ public class AllOrderItemsAdmin extends Fragment {
     FirebaseDatabase database;
     DatabaseReference adminorderref;
     Query query;
-    TextView tvcallbtn;
+
 
     Toolbar toolbar;
+    EditText etsearchitem;
 
     FirebaseRecyclerAdapter<OrderDetails, MyorderViewholder> adapter;
 
@@ -54,6 +58,7 @@ public class AllOrderItemsAdmin extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_all_order_items_admin, container, false);
         allorderrecycler=view.findViewById(R.id.allorderadminrecycler);
+        etsearchitem=view.findViewById(R.id.etitemsearch);
 
 
 
@@ -82,7 +87,28 @@ public class AllOrderItemsAdmin extends Fragment {
                 NavHostFragment.findNavController(AllOrderItemsAdmin.this).navigate(R.id.adminHome);
             }
         });
+        etsearchitem.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length()==0){
+                    query=  adminorderref;
+                    setmyorderitem();
+                }else {
+                    query=adminorderref.orderByChild("username").startAt(editable.toString()).endAt(editable.toString()+ "\uf8ff");
+                   setmyorderitem();
+                }
+            }
+        });
 
 
 

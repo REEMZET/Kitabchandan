@@ -60,7 +60,12 @@ public class MessageAdapter extends RecyclerView.Adapter {
         if (viewType == ItemSent) {
             View view = LayoutInflater.from(context).inflate(R.layout.sendmsglayout, parent, false);
             return new SentViewholder(view);
-        } else{
+        }else if (viewType==AmdinRecieve){
+            View view = LayoutInflater.from(context).inflate(R.layout.adminrecievelayout, parent, false);
+            return new ReceiverViewholder(view);
+        }
+
+        else{
             View view = LayoutInflater.from(context).inflate(R.layout.recievemsglayout, parent, false);
             return new ReceiverViewholder(view);
         }
@@ -74,6 +79,8 @@ public class MessageAdapter extends RecyclerView.Adapter {
         if (FirebaseAuth.getInstance().getUid().equals(message.getSenderuid())) {
             return ItemSent;
 
+        }else if (message.getSenderaccounttype().equals("Admin")){
+            return AmdinRecieve;
         }
         else{
             return ItemRecieve;
@@ -83,8 +90,6 @@ public class MessageAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MessageModel message = messageModels.get(position);
-
-
         if (holder.getClass() == SentViewholder.class) {
             SentViewholder viewholder = (SentViewholder) holder;
             viewholder.sentextmsg.setText(message.getMessage());
@@ -101,7 +106,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference msg = database.getReference("App/chat");
-                                    msg.child("public").child(message.getMessageid()).removeValue();
+                                    msg.child(message.getSenderuid()).child(message.getMessageid()).removeValue();
                                 }
                             }).setNegativeButton("No", null).show();
 

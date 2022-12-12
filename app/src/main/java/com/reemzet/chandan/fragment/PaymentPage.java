@@ -243,7 +243,7 @@ CartModel cartModel;
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
         String formattedDate = df.format(cd);
         orderid=orderref.child(mAuth.getUid()).child("order").push().getKey();
-        orderDetails=new OrderDetails(formattedDate,paymentoption,time,"Orders","4",totalprice,orderid,"Pending",userModel.getUseraddress(),userModel.getUserlocation(),userModel.getUsername(),userModel.getUserphone(),userModel.getUseruid(),userModel.getDeviceid());
+        orderDetails=new OrderDetails(formattedDate,paymentoption,time,"Orders","4",totalprice,orderid,"Pending",userModel.getUseraddress(),userModel.getUserlocation(),userModel.getUsername().toUpperCase(Locale.ROOT),userModel.getUserphone(),userModel.getUseruid(),userModel.getDeviceid());
 
         admincart.child(orderid).setValue(orderDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
